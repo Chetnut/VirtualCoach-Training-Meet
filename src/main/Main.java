@@ -4,12 +4,14 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import main.ui.MainView;
 
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Hello JavaFX!");
-        primaryStage.setScene(new Scene(new Label("It works!"), 300, 200));
+        MainView view = new MainView();
+        primaryStage.setTitle("Mock Meet Trainer");
+        primaryStage.setScene(new Scene(view.getRoot(), 800, 600));
         primaryStage.show();
     }
 
