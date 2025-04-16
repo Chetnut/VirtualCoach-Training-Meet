@@ -3,54 +3,70 @@ package main.ui;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import main.model.Swimmer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SwimmerForm {
-    private VBox layout;
-    private TextField nameField;
-    private TableView<Swimmer> swimmerTable;
-    private List<Swimmer> swimmerList = new ArrayList<>();
+
+    private VBox root = new VBox(20);
+    private static List<Swimmer> swimmerDatabase = new ArrayList<>();
+    private TableView<Swimmer> swimmerTable = new TableView<>();
 
     public SwimmerForm() {
-        layout = new VBox(10);
-        layout.setPadding(new Insets(10));
+        root.setPadding(new Insets(20));
+        root.setStyle("-fx-background-color: #f0f8ff;"); // Light blue background
 
-        // Form
-        Label title = new Label("Add New Swimmer");
-        nameField = new TextField();
-        nameField.setPromptText("Swimmer Name");
+        Label header = new Label("Add Swimmers");
+        header.setFont(new Font("Arial", 24));
+        header.setTextFill(Color.DARKBLUE);
 
-        Button addButton = new Button("Add Swimmer");
-        addButton.setOnAction(e -> addSwimmer());
+        HBox inputRow = new HBox(15);
+        inputRow.setPadding(new Insets(10));
 
-        // Table
-        swimmerTable = new TableView<>();
-        TableColumn<Swimmer, String> nameCol = new TableColumn<>("Name");
-        nameCol.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getName()));
-        swimmerTable.getColumns().addAll(nameCol);
+        TextField nameField = new TextField();
+        nameField.setPromptText("Enter Swimmer Name");
+        nameField.setPrefWidth(200);
+        nameField.setFont(new Font(14));
 
-        layout.getChildren().addAll(title, nameField, addButton, new Label("Swimmer Roster:"), swimmerTable);
-    }
+        Button addButton = new Button("Add");
+        addButton.setFont(new Font(14));
+        addButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white;");
+        addButton.setPrefHeight(30);
 
-    private void addSwimmer() {
-        String name = nameField.getText();
+        inputRow.getChildren().addAll(new Label("Name:"), nameField, addButton);
 
-        if (!name.isEmpty()) {
-            Swimmer s = new Swimmer(name);
-            swimmerList.add(s);
-            swimmerTable.getItems().add(s);
-            nameField.clear();
-        }
+        // Table setup
+        TableColumn<Swimmer, String> nameCol = new TableColumn<>("Swimmer");
+        nameCol.setCellValueFactory(data -> data.getValue().nameProperty());
+        nameCol.setPrefWidth(300);
+
+        swimmerTable.getColumns().add(nameCol);
+        swimmerTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        swimmerTable.setPrefHeight(250);
+
+        // Add swimmer action
+        addButton.setOnAction(e -> {
+            String name = nameField.getText();
+            if (!name.isEmpty()) {
+                Swimmer swimmer = new Swimmer(name);
+                swimmerDatabase.add(swimmer);
+                swimmerTable.getItems().add(swimmer);
+                nameField.clear();
+            }
+        });
+
+        root.getChildren().addAll(header, inputRow, swimmerTable);
     }
 
     public Pane getPane() {
-        return layout;
+        return root;
     }
 
-    public List<Swimmer> getSwimmers() {
-        return swimmerList;
+    public static List<Swimmer> getSwimmerList() {
+        return swimmerDatabase;
     }
 }

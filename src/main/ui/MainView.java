@@ -9,8 +9,10 @@ public class MainView {
     public MainView() {
         root = new TabPane();
 
-        root.getTabs().add(new Tab("Swimmers", new SwimmerForm().getPane()));
-        // You'll later add: Events, Heats, Results, etc.
+        root.getTabs().add(new Tab("Swimmer Setup", new SwimmerForm().getPane()));
+        root.getTabs().add(new Tab("Meet Generator", new MeetGeneratorView().getPane()));
+        root.getTabs().add(new Tab("Heat Entry", new HeatEntryView().getPane()));
+        root.getTabs().add(new Tab("Leaderboard", new LeaderboardView().getPane()));
     }
 
     public TabPane getRoot() {
