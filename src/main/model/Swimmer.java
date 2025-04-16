@@ -1,14 +1,29 @@
 package main.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Swimmer {
     private String name;
-    private String group;
+    private Map<String, Double> bestTimes = new HashMap<>();
 
-    public Swimmer(String name, String group) {
+    public Swimmer(String name) {
         this.name = name;
-        this.group = group;
     }
 
-    public String getName() { return name; }
-    public String getGroup() { return group; }
+    public String getName() {
+        return name;
+    }
+
+    public void setBestTime(String event, double time) {
+        bestTimes.put(event, time);
+    }
+
+    public Double getBestTime(String event) {
+        return bestTimes.get(event);
+    }
+
+    public Map<String, Double> getAllBestTimes() {
+        return bestTimes;
+    }
 }

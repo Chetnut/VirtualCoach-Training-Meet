@@ -8,8 +8,9 @@ public class MainView {
 
     public MainView() {
         root = new TabPane();
+
         root.getTabs().add(new Tab("Swimmers", new SwimmerForm().getPane()));
-        root.getTabs().add(new Tab("Events", new EventSetupView().getPane()));
+        // You'll later add: Events, Heats, Results, etc.
     }
 
     public TabPane getRoot() {

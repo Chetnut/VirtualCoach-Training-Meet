@@ -5,22 +5,21 @@ import java.util.List;
 
 public class Event {
     private String name;
-    private String group;
     private List<Swimmer> swimmers = new ArrayList<>();
 
-    public Event(String name, String group) {
+    public Event(String name) {
         this.name = name;
-        this.group = group;
     }
 
-    public void addSwimmer(Swimmer s) {
-        swimmers.add(s);
+    public void addSwimmer(Swimmer swimmer) {
+        swimmers.add(swimmer);
     }
 
     public List<Swimmer> getSwimmers() {
         return swimmers;
     }
 
-    public String getName() { return name; }
-    public String getGroup() { return group; }
+    public String getName() {
+        return name;
+    }
 }
