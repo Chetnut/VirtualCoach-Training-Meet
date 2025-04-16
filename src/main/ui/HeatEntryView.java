@@ -20,10 +20,19 @@ public class HeatEntryView {
 
     public HeatEntryView() {
         root.setPadding(new Insets(10));
+        root.setStyle("-fx-background-color: #e0f7fa;");
 
         Label title = new Label("Enter Heat Results");
-        Button refreshBtn = new Button("Load Events");
-        refreshBtn.setOnAction(e -> {
+        title.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #00796b;");
+
+        HBox selectorRow = new HBox(10);
+        selectorRow.setPadding(new Insets(10, 0, 10, 0));
+        Button loadBtn = new Button("Load Events");
+        loadBtn.setStyle("-fx-font-size: 16px; -fx-background-color: #00796b; -fx-text-fill: white;");
+        eventSelector.setStyle("-fx-font-size: 16px; -fx-pref-height: 35px; -fx-pref-width: 250px;");
+        // selectorRow.getChildren().addAll(eventSelector, loadBtn);
+
+        loadBtn.setOnAction(e -> {
             eventSelector.getItems().clear();
             for (Event ev : MeetGeneratorView.getEvents()) {
                 eventSelector.getItems().add(ev.getName());
@@ -37,7 +46,7 @@ public class HeatEntryView {
         }
 
         eventSelector.setOnAction(e -> loadSelectedEventHeats(eventSelector.getValue()));
-        root.getChildren().addAll(title, refreshBtn, eventSelector);
+        root.getChildren().addAll(title, loadBtn, eventSelector);
 
         // Table columns
         TableColumn<HeatRow, String> nameCol = new TableColumn<>("Swimmer");

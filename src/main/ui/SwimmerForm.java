@@ -3,8 +3,9 @@ package main.ui;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.paint.Color;
 import main.model.Swimmer;
 
 import java.util.ArrayList;
@@ -17,38 +18,35 @@ public class SwimmerForm {
     private TableView<Swimmer> swimmerTable = new TableView<>();
 
     public SwimmerForm() {
-        root.setPadding(new Insets(20));
-        root.setStyle("-fx-background-color: #f0f8ff;"); // Light blue background
+        root.setPadding(new Insets(30));
+        root.setStyle("-fx-background-color: #e0f7fa;"); // Light blue like MeetGenerator
 
-        Label header = new Label("Add Swimmers");
-        header.setFont(new Font("Arial", 24));
-        header.setTextFill(Color.DARKBLUE);
+        Label title = new Label("Add Swimmers");
+        title.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #00796b;");
 
-        HBox inputRow = new HBox(15);
-        inputRow.setPadding(new Insets(10));
+        HBox inputRow = new HBox(10);
+        inputRow.setPadding(new Insets(10, 0, 10, 0));
 
+        Label nameLabel = new Label("Name:");
+        nameLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #00796b;");
         TextField nameField = new TextField();
         nameField.setPromptText("Enter Swimmer Name");
-        nameField.setPrefWidth(200);
-        nameField.setFont(new Font(14));
+        nameField.setStyle("-fx-pref-width: 200px; -fx-pref-height: 40px; -fx-font-size: 16px;");
+
 
         Button addButton = new Button("Add");
-        addButton.setFont(new Font(14));
-        addButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white;");
-        addButton.setPrefHeight(30);
+        addButton.setStyle("-fx-font-size: 16px; -fx-background-color: #00796b; -fx-text-fill: white; -fx-pref-height: 40px; -fx-pref-width: 60;");
 
-        inputRow.getChildren().addAll(new Label("Name:"), nameField, addButton);
+        inputRow.getChildren().addAll(nameLabel, nameField, addButton);
 
-        // Table setup
-        TableColumn<Swimmer, String> nameCol = new TableColumn<>("Swimmer");
+        TableColumn<Swimmer, String> nameCol = new TableColumn<>("Swimmer Name");
         nameCol.setCellValueFactory(data -> data.getValue().nameProperty());
-        nameCol.setPrefWidth(300);
+        nameCol.setPrefWidth(600);
 
         swimmerTable.getColumns().add(nameCol);
-        swimmerTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        swimmerTable.setPrefHeight(250);
+        // swimmerTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        swimmerTable.setPrefHeight(300);
 
-        // Add swimmer action
         addButton.setOnAction(e -> {
             String name = nameField.getText();
             if (!name.isEmpty()) {
@@ -59,7 +57,7 @@ public class SwimmerForm {
             }
         });
 
-        root.getChildren().addAll(header, inputRow, swimmerTable);
+        root.getChildren().addAll(title, inputRow, swimmerTable);
     }
 
     public Pane getPane() {

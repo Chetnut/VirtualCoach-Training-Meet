@@ -18,12 +18,17 @@ public class LeaderboardView {
 
     public LeaderboardView() {
         root.setPadding(new Insets(10));
+        root.setStyle("-fx-background-color: #e0f7fa;");
 
-        Button refreshButton = new Button("Refresh Leaderboard");
-        refreshButton.setOnAction(e -> updateLeaderboard());
+        Button refreshBtn = new Button("Refresh Leaderboard");
+        refreshBtn.setStyle( "-fx-background-color: #00796b; -fx-text-fill: white");
+        refreshBtn.setOnAction(e -> updateLeaderboard());
 
-        root.getChildren().addAll(new Label("Event Results:"), eventResultsList,
-                                  new Label("Overall Scores:"), totalScoresArea, refreshButton);
+        Label resultLbl = new Label("Event Results:");
+        resultLbl.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #00796b;");
+        Label scoreLbl = new Label("Overall Scores:");
+        scoreLbl.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #00796b;");
+        root.getChildren().addAll(resultLbl, eventResultsList, scoreLbl, totalScoresArea, refreshBtn);
     }
 
     private void updateLeaderboard() {
@@ -32,12 +37,12 @@ public class LeaderboardView {
 
         for (Event event : MeetGeneratorView.getEvents()) {
             List<Swimmer> swimmers = new ArrayList<>(event.getSwimmers());
-            // Sort swimmers by their race time (assuming set in HeatEntryView)
+            // Sort swimmers by their race time ( set in HeatEntryView)
             swimmers.sort(Comparator.comparingDouble(s -> {
                 try {
                     return Double.parseDouble(s.getBestTime(event.getName()));
                 } catch (Exception e) {
-                    return Double.MAX_VALUE; // No time entered yet
+                    return Double.MAX_VALUE; // no time entered yet
                 }
             }));
 
@@ -48,13 +53,13 @@ public class LeaderboardView {
                 String time = s.getBestTime(event.getName());
             
                 if (time == null || time.isBlank()) {
-                    continue; // Skip swimmers with no recorded time
+                    continue; // Skip swimmrr with no time
                 }
             
                 String entry = placement + ". " + s.getName() + " - " + time;
                 eventResultsList.getItems().add("    " + entry);
             
-                // Score: 6 - placement (only top 6 get points)
+                // Score: 6-5-4-3-2-1 for top 6
                 if (placement <= 6) {
                     swimmerScores.put(s.getName(),
                         swimmerScores.getOrDefault(s.getName(), 0) + (7 - placement));
@@ -64,10 +69,10 @@ public class LeaderboardView {
             }
             
 
-            eventResultsList.getItems().add(""); // spacing between events
+            eventResultsList.getItems().add(""); // spacing
         }
 
-        // Show total scores
+        // Show scores
         StringBuilder scoreBuilder = new StringBuilder();
         swimmerScores.entrySet().stream()
                 .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())

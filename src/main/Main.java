@@ -10,7 +10,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         MainView view = new MainView();
-        primaryStage.setTitle("Mock Meet Trainer");
+        primaryStage.setTitle("VirtualCoach Training Meet");
         primaryStage.setScene(new Scene(view.getRoot(), 800, 600));
         primaryStage.show();
     }
