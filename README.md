@@ -31,8 +31,8 @@ The VirtualCoach Training Meet app is a desktop application designed to help swi
 ### How to Run
 
 1. Clone this repository
-2. Open the project in VS Code or your preferred Java IDE
-3. Ensure your JavaFX libraries are properly set up
+2. Open the project in VS Code
+3. Make sure JavaFX libraries are set up
 4. Run `Main.java`
 
 ---
