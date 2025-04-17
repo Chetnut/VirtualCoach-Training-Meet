@@ -18,27 +18,20 @@ The app uses Java 17 and JavaFX 21. All files are stored here in this GitHub rep
 
 #### Class Files Explanation
 
-Swimmer.java
-This class is for making swimmer objects. Each swimmer has a name and a list of their best times.
---
-Event.java
-This class represents a swim event, like “50 Free” or “100 IM.” Each event has a name and a list of swimmers who are racing in it.
---
-PracticeType.java
-This is an enum that stores different types of meets: Freestyle, IM, and Stroke. Each type has a list of events that match that type.
---
-SwimmerForm.java
-This is the screen where you add swimmers. You type in a name, click a button, and it shows up in a table.
---
-MeetGeneratorView.java
-This screen lets you choose a meet type (freestyle, IM, stroke) and generates events using the swimmers you added.
---
-HeatEntryView.java
-This screen shows the events and lets you enter each swimmer’s time for their race.
---
-LeaderboardView.java
-This screen shows who scored points and keeps track of the total scores for all swimmers.
---
-MainView.java
-This connects all the screens (tabs) together so the app has multiple tabs for swimmer setup, meet generation, heat entry, and leaderboard.
---
+Swimmer – has a name (StringProperty) and a map of bestTimes that connects event names to time strings (Map<String, String>).
+
+Event – has a name (String) and a list of swimmers (List<Swimmer>).
+
+PracticeType – an enum with three choices: FREESTYLE, IM, STROKE. Each one has a name and a list of event names (List<String>).
+
+SwimmerForm – has a VBox layout (root), a static list of swimmers (List<Swimmer>), and a TableView that shows swimmer data.
+
+MeetGeneratorView – has a VBox layout (root), a ComboBox to choose practice type, a ListView to show generated events, and a static list of all created Event objects.
+
+HeatEntryView – has a VBox layout (root), a ComboBox to choose an event, a TableView to show swimmers and heat numbers, and a map that connects each event name to its list of heat rows (Map<String, List<HeatRow>>).
+
+LeaderboardView – has a VBox layout (root), a ListView that shows results for each event, and a TextArea that shows the total scores.
+
+MainView – has a TabPane (with one tab for each of the above views) and loads all views into tabs.
+
+Main – calls MainView and starts the whole app in a JavaFX window.
