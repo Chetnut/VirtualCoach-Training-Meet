@@ -19,14 +19,14 @@ The VirtualCoach Training Meet app is a desktop application designed to help swi
 3. **Enter Heat Times**
 4. **View Leaderboard Results** with scores
 
----
+--
 
 ### System Requirements
 
 - Java 17 or higher
 - JavaFX SDK
 
----
+--
 
 ### How to Run
 
@@ -35,7 +35,7 @@ The VirtualCoach Training Meet app is a desktop application designed to help swi
 3. Make sure JavaFX libraries are set up
 4. Run `Main.java`
 
----
+--
 
 ### How to Use the Application
 
