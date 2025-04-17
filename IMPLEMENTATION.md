@@ -1,18 +1,18 @@
-# Implementation Manual: Mock Meet Trainer
+# Implementation Manual: VirtualCoach Training Meet
 
 ## Overview
 
-This application is a JavaFX-based desktop tool that allows swim coaches to simulate a mock swim meet for training purposes. It includes functionality to:
+The application allows swim coaches to simulate a mock swim meet for training purposes. With it, you can:
 - Add and manage swimmers
-- Generate events based on selected meet type
+- Generate events based on meet type
 - Enter heat results for each swimmer
-- Display a ranked leaderboard with calculated scores
+- Display a leaderboard with scores
 
-The app is entirely implemented in Java and JavaFX, using object-oriented design principles such as encapsulation, inheritance, and polymorphism.
+The app is entirely implemented in Java and JavaFX, using object-oriented design principles.
 
 ---
 
-## Class Structure
+## Structure
 
 ### `Swimmer`
 - **Purpose**: Represents a swimmer and their best times per event.
