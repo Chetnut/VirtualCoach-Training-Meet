@@ -12,7 +12,7 @@ This project was insired by personal experience as a member of a college swim te
 
 ## User Manual
 
-The VirtualCoach Training Meet app is a desktop application designed to help swim coaches create practices that resemble a meet an foster competition between the swimmers. The app allows you to:
+The VirtualCoach Training Meet app is a desktop application designed to help swim coaches create practices that resemble a meet and foster competition between the athletes. The app allows you to:
 
 1. **Add Swimmers**
 2. **Generate Meet Events** based on a practice type
