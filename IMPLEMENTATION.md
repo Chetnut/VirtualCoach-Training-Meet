@@ -1,77 +1,108 @@
-🛠️ Implementation Manual: Mock Meet Trainer
-Overview
-This application is written entirely in Java using JavaFX and follows an object-oriented design. It includes multiple custom classes and GUI views for managing swimmers, generating mock swim meets, entering heat times, and displaying a ranked leaderboard.
+# Implementation Manual: Mock Meet Trainer
 
-1. Class Structure & Relationships
-Refer to the included UML diagram for full structure.
+## Overview
 
-SwimmerForm.java
+This application is a JavaFX-based desktop tool that allows swim coaches to simulate a mock swim meet for training purposes. It includes functionality to:
+- Add and manage swimmers
+- Generate events based on selected meet type
+- Enter heat results for each swimmer
+- Display a ranked leaderboard with calculated scores
 
-Collects and displays a list of swimmers.
+The app is entirely implemented in Java and JavaFX, using object-oriented design principles such as encapsulation, inheritance, and polymorphism.
 
-Uses JavaFX TableView to bind swimmer names via StringProperty.
+---
 
-Swimmer.java
+## Class Structure
 
-Simple model class with StringProperty name and a Map<String, String> for storing best times by event.
+### `Swimmer`
+- **Purpose**: Represents a swimmer and their best times per event.
+- **Fields**:
+  - `StringProperty name`
+  - `Map<String, String> bestTimes`
+- **Key Methods**:
+  - `getName()`, `setName()`, `nameProperty()`
+  - `setBestTime(String event, String time)`
+  - `getBestTime(String event)`
 
-PracticeType.java
+---
 
-Enum with predefined meet types (FREESTYLE, IM, STROKE) and their corresponding event names.
+### `Event`
+- **Purpose**: Represents a swim event with a name and a list of swimmers.
+- **Fields**:
+  - `String name`
+  - `List<Swimmer> swimmers`
+- **Key Methods**:
+  - `getName()`, `addSwimmer(Swimmer s)`, `getSwimmers()`
 
-MeetGeneratorView.java
+---
 
-Handles user selection of practice type.
+### `PracticeType` (Enum)
+- **Purpose**: Enum defining event sets for different meet types (`FREESTYLE`, `IM`, `STROKE`)
+- **Fields**:
+  - `String name`
+  - `List<String> events`
+- **Key Methods**:
+  - `getEvents()`
 
-Generates a List<Event> based on the selection and assigns all swimmers to each event.
+---
 
-Event.java
+### `SwimmerForm`
+- **Purpose**: JavaFX UI pane to input and display swimmers in a `TableView`.
+- **Fields**:
+  - `List<Swimmer> swimmerDatabase`
+  - `TableView<Swimmer> swimmerTable`
+- **Key Methods**:
+  - `getPane()`, `getSwimmerList()`
 
-Represents an individual swim event.
+---
 
-Holds a list of assigned swimmers and provides access to them for heat generation or scoring.
+### `MeetGeneratorView`
+- **Purpose**: UI to select a meet type and generate events using `PracticeType`.
+- **Fields**:
+  - `ComboBox<PracticeType> practiceTypeSelector`
+  - `List<Event> generatedEvents`
+- **Key Methods**:
+  - `generateMeet(PracticeType type)`
+  - `getEvents()`
 
-HeatEntryView.java
+---
 
-Lets the coach enter times for each swimmer in each event.
+### `HeatEntryView`
+- **Purpose**: UI to select an event and enter race times per swimmer.
+- **Fields**:
+  - `ComboBox<String> eventSelector`
+  - `TableView<HeatRow>`
+  - `Map<String, List<HeatRow>> eventHeats`
+- **Key Methods**:
+  - `loadSelectedEventHeats(String eventName)`
 
-Uses a custom nested class HeatRow to track swimmer name, heat number, and entered time.
+---
 
-LeaderboardView.java
+### `LeaderboardView`
+- **Purpose**: UI pane that displays leaderboard rankings and scores per swimmer.
+- **Fields**:
+  - `ListView<String> eventResultsList`
+  - `TextArea totalScoresArea`
+- **Key Methods**:
+  - `updateLeaderboard()`
 
-Displays event-by-event rankings and overall swimmer scores.
+---
 
-Scores only swimmers with valid times.
+### `MainView` and `Main`
+- **Purpose**: Wraps all the tabs together and starts the JavaFX application.
 
-MainView.java
+---
 
-Main application tab layout combining all views.
+## Notable Implementation Features
 
-Sets the JavaFX TabPane and organizes navigation between views.
+- **Object-Oriented Design**: Every tab (Swimmer setup, Meet generator, Heat entry, Leaderboard) is implemented as a separate class with encapsulated logic.
+- **JavaFX GUI**: Uses `VBox`, `HBox`, `ComboBox`, `TableView`, and styled buttons to build a cohesive UI.
+- **Scoring Logic**: The leaderboard assigns points only for swimmers who have times entered, using race order to determine placement.
 
-Main.java
+---
 
-Launches the application and displays the main view.
+## Technologies Used
 
-2. Design Considerations
-JavaFX Styling: The UI uses consistent setStyle() calls in Java to apply padding, button color, and layout without external CSS.
-
-Data Sharing: Shared state like swimmer and event lists are passed via static methods (e.g., SwimmerForm.getSwimmerList()) to maintain a simple flow across multiple tabs.
-
-Scoring Logic: Leaderboard skips scoring if no time was entered, ensuring fair and realistic practice scoring.
-
-3. Challenges
-Handling UI layout consistently across all views in JavaFX without FXML or CSS required careful use of VBox/HBox and style properties.
-
-Synchronizing data across tabs required central static storage patterns rather than full MVC.
-
-Ensuring times were properly saved and retrieved across different views required debugging and test cases.
-
-4. How It Aligns with Project Goals
-✅ Uses JavaFX GUI with multiple scenes.
-
-✅ Applies inheritance and object-oriented design.
-
-✅ Implements loops, conditions, lists, and event-driven programming.
-
-✅ Demonstrates a real-world solution for swim coaching use.
+- Java 17
+- JavaFX 21
+- GitHub for version control
