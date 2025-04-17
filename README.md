@@ -21,14 +21,14 @@ The VirtualCoach Training Meet app is a desktop application designed to help swi
 
 ---
 
-### 🛠️ System Requirements
+### System Requirements
 
 - Java 17 or higher
 - JavaFX SDK (linked via `--module-path` in your `launch.json` or project settings)
 
 ---
 
-### ▶️ How to Run
+### How to Run
 
 1. Clone this repository
 2. Open the project in VS Code or your preferred Java IDE
