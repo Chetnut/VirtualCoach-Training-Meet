@@ -24,7 +24,7 @@ The VirtualCoach Training Meet app is a desktop application designed to help swi
 ### System Requirements
 
 - Java 17 or higher
-- JavaFX SDK (linked via `--module-path` in your `launch.json` or project settings)
+- JavaFX SDK
 
 ---
 
